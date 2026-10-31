@@ -7,16 +7,13 @@ workflows:
       node: 20
       xcode: latest
     scripts:
-      - name: Install dependencies
+      - name: Install dependencies & EAS CLI
         script: |
           npm install
-      - name: Prebuild iOS project
+          npm install -g eas-cli
+      - name: Build local Expo bundle
         script: |
-          npx expo prebuild --platform ios --clean
-      - name: Install CocoaPods
-        script: |
-          cd ios && pod install
+          npx expo export --platform ios
     artifacts:
-      - ios/*.ipa
-      - "**/build/ios/**/*.ipa"
-      - ios/build/Build/Products/Release-iphoneos/*.app
+      - dist/**/*
+      - ios/**/*
