@@ -7,13 +7,14 @@ workflows:
       node: latest
       xcode: latest
     scripts:
-      - name: Install dependencies & Expo CLI
+      - name: Install dependencies
         script: |
           npm install
-          npm install -g eas-cli expo-cli
-      - name: Expo Prebuild for iOS
+      - name: Prebuild iOS project
         script: |
-          npx expo prebuild --platform ios
+          npx expo prebuild --platform ios --clean
     artifacts:
-      - build/ios/ipa/*.ipa
+      - ios/*.tar.gz
+      - "*.ipa"
+      - "**/build/ios/**/*.ipa"
       - ios/build/Build/Products/Release-iphoneos/*.app
