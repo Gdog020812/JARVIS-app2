@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "JARVIS",
+    "slug": "jarvis-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a10"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.george.jarvis"
+    }
+  }
+}
