@@ -4,9 +4,8 @@ workflows:
     max_build_duration: 60
     instance_type: mac_mini_m2
     environment:
-      node: latest
+      node: 20
       xcode: latest
-      cocoapods: default
     scripts:
       - name: Install dependencies
         script: |
@@ -17,9 +16,7 @@ workflows:
       - name: Install CocoaPods
         script: |
           cd ios && pod install
-      - name: Build iOS App Archive
-        script: |
-          xcodebuild -workspace ios/jarvis.xcworkspace -scheme jarvis -sdk iphoneos -configuration Release archive -archivePath $CM_BUILD_DIR/build/jarvis.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     artifacts:
-      - build/**/*.xcarchive
+      - ios/*.ipa
+      - "**/build/ios/**/*.ipa"
       - ios/build/Build/Products/Release-iphoneos/*.app
