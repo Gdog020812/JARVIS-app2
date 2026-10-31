@@ -6,6 +6,7 @@ workflows:
     environment:
       node: latest
       xcode: latest
+      cocoapods: default
     scripts:
       - name: Install dependencies
         script: |
@@ -13,8 +14,12 @@ workflows:
       - name: Prebuild iOS project
         script: |
           npx expo prebuild --platform ios --clean
+      - name: Install CocoaPods
+        script: |
+          cd ios && pod install
+      - name: Build iOS App Archive
+        script: |
+          xcodebuild -workspace ios/jarvis.xcworkspace -scheme jarvis -sdk iphoneos -configuration Release archive -archivePath $CM_BUILD_DIR/build/jarvis.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     artifacts:
-      - ios/*.tar.gz
-      - "*.ipa"
-      - "**/build/ios/**/*.ipa"
+      - build/**/*.xcarchive
       - ios/build/Build/Products/Release-iphoneos/*.app
